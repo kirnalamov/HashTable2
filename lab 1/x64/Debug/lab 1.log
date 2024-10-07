@@ -1,0 +1,20 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (lab 1.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+  HashTable.cpp
+C:\Users\malan\Рабочий стол\labAICD\lab 2\lab 1\HashTable.h(17,25): warning C4677: tableModel: сигнатура члена, не являющегося частным, содержит частный тип сборки "HashTableModel"
+  (компиляция исходного файла "HashTable.cpp")
+  C:\Users\malan\Рабочий стол\labAICD\lab 2\lab 1\HashTableModel.hpp(3,11):
+   см. объявление "HashTableModel"
+  
+C:\Users\malan\Рабочий стол\labAICD\lab 2\lab 1\HashTable.cpp(19,14): warning C4244: инициализация: преобразование "time_t" в "int", возможна потеря данных
+C:\Users\malan\Рабочий стол\labAICD\lab 2\lab 1\HashTable.cpp(23,55): warning C4244: аргумент: преобразование "double" в "_Ty", возможна потеря данных
+C:\Users\malan\Рабочий стол\labAICD\lab 2\lab 1\HashTable.cpp(23,55): warning C4244:         with
+C:\Users\malan\Рабочий стол\labAICD\lab 2\lab 1\HashTable.cpp(23,55): warning C4244:         [
+C:\Users\malan\Рабочий стол\labAICD\lab 2\lab 1\HashTable.cpp(23,55): warning C4244:             _Ty=int
+C:\Users\malan\Рабочий стол\labAICD\lab 2\lab 1\HashTable.cpp(23,55): warning C4244:         ]
+C:\Users\malan\Рабочий стол\labAICD\lab 2\lab 1\HashTable.cpp(23,50): warning C4244: аргумент: преобразование "double" в "_Ty", возможна потеря данных
+C:\Users\malan\Рабочий стол\labAICD\lab 2\lab 1\HashTable.cpp(23,50): warning C4244:         with
+C:\Users\malan\Рабочий стол\labAICD\lab 2\lab 1\HashTable.cpp(23,50): warning C4244:         [
+C:\Users\malan\Рабочий стол\labAICD\lab 2\lab 1\HashTable.cpp(23,50): warning C4244:             _Ty=int
+C:\Users\malan\Рабочий стол\labAICD\lab 2\lab 1\HashTable.cpp(23,50): warning C4244:         ]
+  HashTable.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
+  lab 1.vcxproj -> C:\Users\malan\Рабочий стол\labAICD\lab 2\x64\Debug\lab 2.exe
