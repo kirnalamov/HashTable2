@@ -52,6 +52,10 @@ namespace lab2 {
 
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Button^ execute;
+	private: System::Windows::Forms::TextBox^ ReplaceValue;
+
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::CheckBox^ checkReplace;
 
 
 
@@ -84,6 +88,9 @@ namespace lab2 {
 			this->ElementValue = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->execute = (gcnew System::Windows::Forms::Button());
+			this->ReplaceValue = (gcnew System::Windows::Forms::TextBox());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->checkReplace = (gcnew System::Windows::Forms::CheckBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -141,7 +148,7 @@ namespace lab2 {
 			// checkDelete
 			// 
 			this->checkDelete->AutoSize = true;
-			this->checkDelete->Location = System::Drawing::Point(828, 134);
+			this->checkDelete->Location = System::Drawing::Point(800, 134);
 			this->checkDelete->Name = L"checkDelete";
 			this->checkDelete->Size = System::Drawing::Size(57, 17);
 			this->checkDelete->TabIndex = 4;
@@ -152,7 +159,7 @@ namespace lab2 {
 			// checkInsert
 			// 
 			this->checkInsert->AutoSize = true;
-			this->checkInsert->Location = System::Drawing::Point(891, 134);
+			this->checkInsert->Location = System::Drawing::Point(863, 134);
 			this->checkInsert->Name = L"checkInsert";
 			this->checkInsert->Size = System::Drawing::Size(52, 17);
 			this->checkInsert->TabIndex = 5;
@@ -182,7 +189,7 @@ namespace lab2 {
 			// 
 			// execute
 			// 
-			this->execute->Location = System::Drawing::Point(745, 281);
+			this->execute->Location = System::Drawing::Point(745, 388);
 			this->execute->Name = L"execute";
 			this->execute->Size = System::Drawing::Size(172, 34);
 			this->execute->TabIndex = 9;
@@ -190,13 +197,47 @@ namespace lab2 {
 			this->execute->UseVisualStyleBackColor = true;
 			this->execute->Click += gcnew System::EventHandler(this, &HashTable::execute_Click);
 			// 
+			// ReplaceValue
+			// 
+			this->ReplaceValue->Font = (gcnew System::Drawing::Font(L"Open Sans Medium", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->ReplaceValue->Location = System::Drawing::Point(745, 330);
+			this->ReplaceValue->Name = L"ReplaceValue";
+			this->ReplaceValue->Size = System::Drawing::Size(159, 36);
+			this->ReplaceValue->TabIndex = 6;
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Open Sans Medium", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label2->Location = System::Drawing::Point(739, 276);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(195, 31);
+			this->label2->TabIndex = 7;
+			this->label2->Text = L"Replace element";
+			// 
+			// checkReplace
+			// 
+			this->checkReplace->AutoSize = true;
+			this->checkReplace->Location = System::Drawing::Point(921, 134);
+			this->checkReplace->Name = L"checkReplace";
+			this->checkReplace->Size = System::Drawing::Size(66, 17);
+			this->checkReplace->TabIndex = 10;
+			this->checkReplace->Text = L"Replace";
+			this->checkReplace->UseVisualStyleBackColor = true;
+			this->checkReplace->CheckedChanged += gcnew System::EventHandler(this, &HashTable::checkReplace_CheckedChanged);
+			// 
 			// HashTable
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1085, 507);
+			this->Controls->Add(this->checkReplace);
 			this->Controls->Add(this->execute);
+			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			this->Controls->Add(this->ReplaceValue);
 			this->Controls->Add(this->ElementValue);
 			this->Controls->Add(this->checkInsert);
 			this->Controls->Add(this->checkDelete);
@@ -223,6 +264,8 @@ namespace lab2 {
 	private: System::Void checkfind_CheckedChanged(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void checkDelete_CheckedChanged(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void checkInsert_CheckedChanged(System::Object^ sender, System::EventArgs^ e);
-private: System::Void execute_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void execute_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void checkReplace_CheckedChanged(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void InsertElementWithDialog(int element);
 };
 }

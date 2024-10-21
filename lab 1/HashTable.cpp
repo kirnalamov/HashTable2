@@ -49,7 +49,7 @@ System::Void lab2::HashTable::updateTable(System::Object^ sender, System::EventA
     averageLable->Text = "Average number of steps : " + (round(tableModel.average() * 1000) / 1000).ToString();
     dataGridView1->Rows->Clear();
     this->dataGridView1->ColumnCount = 2*3; 
-    this->dataGridView1->RowCount = 40;
+    this->dataGridView1->RowCount = 35;
 
     for (int i = 0; i < 40; i++) {
         for (int j = 0; j < 3; j++) {
@@ -71,8 +71,9 @@ System::Void  lab2::HashTable::checkfind_CheckedChanged(System::Object^ sender, 
     // Установите состояние остальных CheckBox
     if (checkfind->Checked) {
         checkDelete->Checked = false;
-        
+        checkReplace->Checked = false;
         checkInsert->Checked = false;
+        ReplaceValue->ReadOnly = true;
     }
 }
 
@@ -80,7 +81,8 @@ System::Void  lab2::HashTable::checkDelete_CheckedChanged(System::Object^ sender
     if (checkDelete->Checked) {
         checkfind->Checked = false;
         checkInsert->Checked = false;
-    
+        checkReplace->Checked = false;
+        ReplaceValue->ReadOnly = true;
     }
 }
 
@@ -88,9 +90,54 @@ System::Void  lab2::HashTable::checkInsert_CheckedChanged(System::Object^ sender
     if (checkInsert->Checked) {
         checkfind->Checked = false;
         checkDelete->Checked = false;
-       
+        checkReplace->Checked = false;
+        ReplaceValue->ReadOnly = true;
     }
 }
+
+System::Void  lab2::HashTable::checkReplace_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+    if (checkReplace->Checked) {
+        checkfind->Checked = false;
+        checkDelete->Checked = false;
+        checkInsert->Checked = false;
+        ReplaceValue->ReadOnly = false;
+    }
+}
+
+System::Void lab2::HashTable::InsertElementWithDialog(int element)
+{
+
+    System::Windows::Forms::DialogResult result = MessageBox::Show(
+        "Хотите вставить элемент " +(element).ToString()  + " ? ",              
+        "Подтверждение вставки",                 
+        MessageBoxButtons::YesNo,                
+        MessageBoxIcon::Question                 
+    );
+
+    // Проверяем, выбрал ли пользователь "Yes"
+    if (result == System::Windows::Forms::DialogResult::Yes) {
+        // Действие по вставке элемента
+        if (tableModel.find(element) >= 0) {
+            MessageBox::Show("Зачение " + ElementValue->Text + " уже присудствует на индексе " + (tableModel.find(element)).ToString(), "Заголовок", MessageBoxButtons::OK, MessageBoxIcon::Information);
+            int r = tableModel.find(element);
+            dataGridView1->Rows[r / 3]->Cells[2 * (r % 3)]->Style->BackColor = System::Drawing::Color::Green;
+            dataGridView1->Rows[r / 3]->Cells[2 * (r % 3) + 1]->Style->BackColor = System::Drawing::Color::Green;
+            return;
+        }
+        tableModel.push(element);
+        int r = tableModel.find(element);
+        dataGridView1->Rows[r / 3]->Cells[2 * (r % 3)]->Style->BackColor = System::Drawing::Color::Green;
+        dataGridView1->Rows[r / 3]->Cells[2 * (r % 3) + 1]->Style->BackColor = System::Drawing::Color::Green;
+        MessageBox::Show("Зачение " + ElementValue->Text + " вставленно на индекс " + (tableModel.find(element)).ToString(), "Заголовок", MessageBoxButtons::OK, MessageBoxIcon::Information);
+    }
+    else {
+        // Пользователь выбрал "No", ничего не делаем
+        MessageBox::Show("Вставка отменена.");
+    }
+    return System::Void();
+}
+
+
 
 System::Void lab2::HashTable::execute_Click(System::Object^ sender, System::EventArgs^ e)
 {
@@ -135,12 +182,31 @@ System::Void lab2::HashTable::execute_Click(System::Object^ sender, System::Even
         
         MessageBox::Show("Зачение " + ElementValue->Text + " отсутствует в таблице", "Заголовок", MessageBoxButtons::OK, MessageBoxIcon::Information);
     }
+    if (checkReplace->Checked) {
+        int val = Convert::ToInt32((ElementValue->Text));
+        int rep = Convert::ToInt32((ReplaceValue->Text));
+        if (tableModel.find(val) >= 0) {
+            int r = tableModel.find(val);
+            tableModel.del(tableModel.find(val));
+            MessageBox::Show("Зачение " + ElementValue->Text + " заменено на значение " + (rep).ToString(), "Заголовок", MessageBoxButtons::OK, MessageBoxIcon::Information);
+            
+            tableModel.push(rep);
+            r = tableModel.find(rep);
+            dataGridView1->Rows[r / 3]->Cells[2 * (r % 3)]->Style->BackColor = System::Drawing::Color::Green;
+            dataGridView1->Rows[r / 3]->Cells[2 * (r % 3) + 1]->Style->BackColor = System::Drawing::Color::Green;
+            return;
+        }
 
+        MessageBox::Show("Зачение " + ElementValue->Text + " отсутствует в таблице", "Заголовок", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        InsertElementWithDialog(rep);
+      
+    }
    
 
 
     return System::Void();
 }
+
 
 
 System::Void lab2::HashTable::HashTable_Load(System::Object^ sender, System::EventArgs^ e) {
